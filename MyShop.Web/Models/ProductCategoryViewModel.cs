@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace MyShop.Web.Models
 {
-    public class PostCategoryViewModel
+    public class ProductCategoryViewModel
     {
         public int ID { set; get; }
-
+        
         public string Name { set; get; }
-
+        
         public string Alias { set; get; }
-
+        
         public string Image { set; get; }
-
+        
         public string Description { set; get; }
 
         public int? ParentID { set; get; }
@@ -32,6 +34,7 @@ namespace MyShop.Web.Models
         public string MetaKeyword { get; set; }
 
         public bool Status { get; set; }
-        public virtual IEnumerable<PostViewModel> Posts { set; get; }
+
+        public virtual IEnumerable<ProductViewModel> Products { set; get; }
     }
 }

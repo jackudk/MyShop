@@ -216,24 +216,18 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Products</a></li>
-                            <li><a ui-sref="product_add"><i class="fa fa-circle-o"></i> Add a product</a></li>
-                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
-                            <span>Layout Options</span>
+                            <span>Sản phẩm</span>
                             <span class="pull-right-container">
                                 <span class="label label-primary pull-right">4</span>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                            <li><a ui-sref="productCategories"><i class="fa fa-circle-o"></i> Danh mục</a></li>
+                            <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
                         </ul>
                     </li>
                     <li>
@@ -582,7 +576,12 @@
     <script src="~/Assets/admin/libs/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="~/App/app.js"></script>
     <script src="~/App/Shared/modules/myshop.common.js"></script>
+    <script src="~/App/Shared/services/apiService.js"></script>
     <script src="~/App/Components/home/homeController.js"></script>
+    <!-- Product Categories -->
+    <script src="~/App/Components/product_categories/productCategories.Module.js"></script>
+    <script src="~/App/Components/product_categories/productCategoryListController.js"></script>
+    <!-- Products -->
     <script src="~/App/Components/products/products.Module.js"></script>
     <script src="~/App/Components/products/productAddController.js"></script>
     <script src="~/App/Components/products/productListController.js"></script>

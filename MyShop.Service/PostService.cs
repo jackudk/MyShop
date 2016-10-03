@@ -1,36 +1,42 @@
 ﻿using MyShop.Data.InfraStructure;
 using MyShop.Data.Respositories;
 using MyShop.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyShop.Service
 {
     public interface IPostService
     {
         Post Add(Post post);
+
         void Update(Post post);
+
         Post Delete(int id);
+
         IEnumerable<Post> GetAll();
+
         IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalPage);
+
         IEnumerable<Post> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
+
         Post GetByID(int id);
+
         IEnumerable<Post> getAllByTagPaging(string tag, int page, int pageSize, out int totalPage);
+
         void SaveChanges();
     }
+
     public class PostService : IPostService
     {
-        IPostRepository _postRepository;
-        IUnitOfWork _unitOfWork;
+        private IPostRepository _postRepository;
+        private IUnitOfWork _unitOfWork;
 
         public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork)
         {
             this._postRepository = postRepository;
             this._unitOfWork = unitOfWork;
         }
+
         public Post Add(Post post)
         {
             return _postRepository.Add(post);

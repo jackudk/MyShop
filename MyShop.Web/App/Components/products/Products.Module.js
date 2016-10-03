@@ -3,6 +3,7 @@
     angular.module('myshop.products', ['myshop.common']).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('products', {
             url: '/products',
