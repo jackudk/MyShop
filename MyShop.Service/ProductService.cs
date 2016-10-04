@@ -15,9 +15,9 @@ namespace MyShop.Service
 
         IEnumerable<Product> GetAll();
 
-        IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage);
+        //IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage);
 
-        IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
+        //IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
 
         Product GetByID(int id);
 
@@ -52,20 +52,20 @@ namespace MyShop.Service
             return _ProductRepository.GetAll(new string[] { "ProductCategory" });
         }
 
-        public IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage)
-        {
-            return _ProductRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryID, out totalPage, page, pageSize, new string[] { "ProductCategory" });
-        }
+        //public IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage)
+        //{
+        //    return _ProductRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryID, out totalPage, page, pageSize, new string[] { "ProductCategory" });
+        //}
 
         public IEnumerable<Product> getAllByTagPaging(string tag, int page, int pageSize, out int totalPage)
         {
             return _ProductRepository.GetAllByTagPaging(tag, page, pageSize, out totalPage);
         }
 
-        public IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage)
-        {
-            return _ProductRepository.GetMultiPaging(x => x.Status, out totalPage, page, pageSize);
-        }
+        //public IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage)
+        //{
+        //    return _ProductRepository.GetMultiPaging(x => x.Status, out totalPage, page, pageSize);
+        //}
 
         public Product GetByID(int id)
         {

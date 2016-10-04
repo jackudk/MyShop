@@ -15,9 +15,9 @@ namespace MyShop.Service
 
         IEnumerable<Post> GetAll();
 
-        IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalPage);
+        //IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalPage);
 
-        IEnumerable<Post> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
+        //IEnumerable<Post> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
 
         Post GetByID(int id);
 
@@ -52,20 +52,20 @@ namespace MyShop.Service
             return _postRepository.GetAll(new string[] { "PostCategory" });
         }
 
-        public IEnumerable<Post> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage)
-        {
-            return _postRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryID, out totalPage, page, pageSize, new string[] { "PostCategory" });
-        }
+        //public IEnumerable<Post> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage)
+        //{
+        //    return _postRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryID, out totalPage, page, pageSize, new string[] { "PostCategory" });
+        //}
 
         public IEnumerable<Post> getAllByTagPaging(string tag, int page, int pageSize, out int totalPage)
         {
             return _postRepository.GetAllByTagPaging(tag, page, pageSize, out totalPage);
         }
 
-        public IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalPage)
-        {
-            return _postRepository.GetMultiPaging(x => x.Status, out totalPage, page, pageSize);
-        }
+        //public IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalPage)
+        //{
+        //    return _postRepository.GetMultiPaging(x => x.Status, out totalPage, page, pageSize);
+        //}
 
         public Post GetByID(int id)
         {

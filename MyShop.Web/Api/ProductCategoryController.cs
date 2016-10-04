@@ -23,13 +23,29 @@ namespace MyShop.Web.Api
         }
 
         [Route("getall")]
-        public HttpResponseMessage Get(HttpRequestMessage request)
+        public HttpResponseMessage Get(HttpRequestMessage request, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
-                var lstProductCategory = _productCategoryService.GetAll();
-                var model = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(lstProductCategory);
-                return request.CreateResponse(HttpStatusCode.OK, model);
+                //var productCategories = _productCategoryService.GetAll();
+                //int totalRows = productCategories.Count();
+
+                //var productCategoriesPaging = productCategories.OrderByDescending(x => x.CreatedDate)
+                //.Skip(page * pageSize).Take(pageSize);
+                int totalRows;
+                var productCategoriesPaging = _productCategoryService.GetAllPaging(page, pageSize, out totalRows);
+
+                var model = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoriesPaging);
+
+                var pagingnationSet = new PaginationSet<ProductCategoryViewModel>()
+                {
+                    Items = model,
+                    Page = page,
+                    TotalCount = totalRows,
+                    TotalPages = (int)Math.Ceiling((decimal)(totalRows / pageSize))
+                };
+
+                return request.CreateResponse(HttpStatusCode.OK, pagingnationSet);
             });
         }
     }

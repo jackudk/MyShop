@@ -2,6 +2,7 @@
 using MyShop.Data.Respositories;
 using MyShop.Model.Models;
 using System.Collections.Generic;
+using System;
 
 namespace MyShop.Service
 {
@@ -15,6 +16,8 @@ namespace MyShop.Service
 
         IEnumerable<ProductCategory> GetAll();
 
+        IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalPage);
+
         IEnumerable<ProductCategory> GetAllByParentID(int parentID);
 
         ProductCategory GetByID(int id);
@@ -24,38 +27,43 @@ namespace MyShop.Service
 
     public class ProductCategoryService : IProductCategoryService
     {
-        private IProductCategoryRepository _ProductCategoryRepository;
+        private IProductCategoryRepository _productCategoryRepository;
         private IUnitOfWork _unitOfWork;
 
         public ProductCategoryService(IProductCategoryRepository ProductCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this._ProductCategoryRepository = ProductCategoryRepository;
+            this._productCategoryRepository = ProductCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
 
         public ProductCategory Add(ProductCategory ProductCategory)
         {
-            return _ProductCategoryRepository.Add(ProductCategory);
+            return _productCategoryRepository.Add(ProductCategory);
         }
 
         public ProductCategory Delete(int id)
         {
-            return _ProductCategoryRepository.Delete(id);
+            return _productCategoryRepository.Delete(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return _ProductCategoryRepository.GetAll();
+            return _productCategoryRepository.GetAll();
         }
 
         public IEnumerable<ProductCategory> GetAllByParentID(int parentID)
         {
-            return _ProductCategoryRepository.GetMulti(x => x.ParentID == parentID && x.Status);
+            return _productCategoryRepository.GetMulti(x => x.ParentID == parentID && x.Status);
+        }
+
+        public IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalPage)
+        {
+            return _productCategoryRepository.GetMultiPaging(null, x => x.CreatedDate, out totalPage, page, pageSize);
         }
 
         public ProductCategory GetByID(int id)
         {
-            return _ProductCategoryRepository.GetSingleById(id);
+            return _productCategoryRepository.GetSingleById(id);
         }
 
         public void SaveChanges()
@@ -65,7 +73,7 @@ namespace MyShop.Service
 
         public void Update(ProductCategory ProductCategory)
         {
-            _ProductCategoryRepository.Update(ProductCategory);
+            _productCategoryRepository.Update(ProductCategory);
         }
     }
 }
