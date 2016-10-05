@@ -136,11 +136,11 @@ namespace MyShop.Data.InfraStructure
             else
             {
                 _resetSet = predicate != null ? dataContext.Set<T>().Where<T>(predicate).AsQueryable() : dataContext.Set<T>().AsQueryable();
-                _resetSet = orderBy != null ? _resetSet.OrderByDescending(orderBy) : _resetSet;
             }
 
             total = _resetSet.Count();
-            _resetSet = skipCount == 0 ? _resetSet.Take(size) : _resetSet.Skip(skipCount).Take(size);
+            _resetSet = orderBy != null ? _resetSet.OrderByDescending(orderBy) : _resetSet;
+            _resetSet = _resetSet.Skip(skipCount).Take(size);
 
             return _resetSet.AsQueryable();
         }

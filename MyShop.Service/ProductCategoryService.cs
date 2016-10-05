@@ -2,7 +2,6 @@
 using MyShop.Data.Respositories;
 using MyShop.Model.Models;
 using System.Collections.Generic;
-using System;
 
 namespace MyShop.Service
 {
@@ -17,6 +16,8 @@ namespace MyShop.Service
         IEnumerable<ProductCategory> GetAll();
 
         IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalPage);
+
+        IEnumerable<ProductCategory> GetAllPaging(string keyWord, int page, int pageSize, out int totalRows);
 
         IEnumerable<ProductCategory> GetAllByParentID(int parentID);
 
@@ -56,9 +57,18 @@ namespace MyShop.Service
             return _productCategoryRepository.GetMulti(x => x.ParentID == parentID && x.Status);
         }
 
-        public IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalPage)
+        public IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalRows)
         {
-            return _productCategoryRepository.GetMultiPaging(null, x => x.CreatedDate, out totalPage, page, pageSize);
+            return _productCategoryRepository.GetMultiPaging(null, x => x.CreatedDate, out totalRows, page, pageSize);
+        }
+
+        public IEnumerable<ProductCategory> GetAllPaging(string keyWord, int page, int pageSize, out int totalRows)
+        {
+            if (string.IsNullOrEmpty(keyWord))
+            {
+                return _productCategoryRepository.GetMultiPaging(null, x => x.CreatedDate, out totalRows, page, pageSize);
+            }
+            return _productCategoryRepository.GetMultiPaging(x => x.Name.Contains(keyWord) || x.Description.Contains(keyWord), x => x.CreatedDate, out totalRows, page, pageSize);
         }
 
         public ProductCategory GetByID(int id)

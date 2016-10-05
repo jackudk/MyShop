@@ -23,7 +23,7 @@ namespace MyShop.Web.Api
         }
 
         [Route("getall")]
-        public HttpResponseMessage Get(HttpRequestMessage request, int page, int pageSize = 20)
+        public HttpResponseMessage Get(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -33,7 +33,7 @@ namespace MyShop.Web.Api
                 //var productCategoriesPaging = productCategories.OrderByDescending(x => x.CreatedDate)
                 //.Skip(page * pageSize).Take(pageSize);
                 int totalRows;
-                var productCategoriesPaging = _productCategoryService.GetAllPaging(page, pageSize, out totalRows);
+                var productCategoriesPaging = _productCategoryService.GetAllPaging(keyWord, page, pageSize, out totalRows);
 
                 var model = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoriesPaging);
 

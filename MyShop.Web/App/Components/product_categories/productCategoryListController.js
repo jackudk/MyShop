@@ -3,23 +3,31 @@
 (function (app) {
     app.controller('productCategoryListController', productCategoryListController);
 
-    productCategoryListController.$inject = ['$scope', 'apiService'];
+    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService'];
 
-    function productCategoryListController($scope, apiService) {
+    function productCategoryListController($scope, apiService, notificationService) {
         $scope.productCategories = [];
         $scope.totalPages = 0;
         $scope.page = 0;
+        $scope.keyWord = '';
 
         $scope.getProductCategories = function (page) {
             page = page || 0;
             var config = {
                 params: {
+                    keyWord: $scope.keyWord,
                     page: page,
                     pageSize: 2
                 }
             };
 
             apiService.get('/api/productCategory/getall', config, function (result) {
+                if (result.data.TotalCount <= 0) {
+                    notificationService.displayWarning("Không tìm thấy bản ghi nào.")
+                } else {
+                    notificationService.displaySuccess("Có " + result.data.TotalCount + " bản ghi");
+                }
+
                 $scope.productCategories = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.totalPages = result.data.TotalPages;
