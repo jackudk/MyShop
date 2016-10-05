@@ -52,7 +52,8 @@ namespace MyShop.Web.Api
                     var model = _postCategoryService.Add(postCategory);
                     _postCategoryService.SaveChanges();
 
-                    response = request.CreateResponse(HttpStatusCode.Created, model);
+                    var responseModel = Mapper.Map<PostCategoryViewModel>(model);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseModel);
                 }
                 return response;
             });
@@ -99,7 +100,8 @@ namespace MyShop.Web.Api
                     var model = _postCategoryService.Delete(id);
                     _postCategoryService.SaveChanges();
 
-                    response = request.CreateResponse(HttpStatusCode.OK, model);
+                    var responseModel = Mapper.Map<PostCategoryViewModel>(model);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseModel);
                 }
                 return response;
             });

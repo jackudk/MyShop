@@ -15,18 +15,10 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Danh mục sản phẩm</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-md-4 pull-right">
+                <div class="col-md-4">
                     <div class="input-group">
                         <input type="text" ng-model="keyWord" class="form-control pull-right" placeholder="Search for...">
                         <span class="input-group-btn">
@@ -36,6 +28,11 @@
                         </span>
                     </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
+                <div class="col-md-8">
+                    <button ui-sref="productCategory_add" class="btn btn-primary pull-right">
+                        <i class="glyphicon glyphicon-plus"></i> Thêm mới
+                    </button>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -50,7 +47,7 @@
                         <tr ng-repeat="item in productCategories">
                             <td>{{item.ID}}</td>
                             <td>{{item.Name}}</td>
-                            <td>{{item.CreatedDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                            <td>{{item.CreatedDate | date:'dd/MM/yyyy HH:mm:ss Z'}}</td>
                             <td>
                                 <span ng-class="{'label label-success': item.Status==true, 'label label-danger': item.Status==false}">
                                     {{item.Status | statusFilter}}
