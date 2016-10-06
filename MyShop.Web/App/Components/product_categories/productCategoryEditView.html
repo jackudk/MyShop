@@ -1,13 +1,13 @@
 ﻿<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Thêm mới sản phẩm
+        Cập nhật danh mục sản phẩm
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
         <li><a href="#">Sản phẩm</a></li>
         <li><a ui-sref="productCategories">Danh mục</a></li>
-        <li class="active">Thêm mới</li>
+        <li class="active">Cập nhật</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -15,11 +15,11 @@
     <!-- Horizontal Form -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Thêm mới</h3>
+            <h3 class="box-title">Cập nhật</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" novalidate name="frmAddProductCategory" role="form" ng-submit="addProductCategory()">
+        <form class="form-horizontal" novalidate name="frmEditProductCategory" role="form" ng-submit="updateProductCategory()">
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-md-2 control-label">Tên</label>
@@ -45,7 +45,6 @@
                         <select name="parentID" class="form-control" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
                             <option value="">Danh mục gốc</option>
                         </select>
-                        <input type="hidden" class="form-control" name="parentID" ng-model="productCategory.ParentID">
                     </div>
                 </div>
                 <div class="form-group">

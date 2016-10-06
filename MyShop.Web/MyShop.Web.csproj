@@ -228,6 +228,8 @@
     <Content Include="App\Components\product_categories\productCategories.Module.js" />
     <Content Include="App\Components\product_categories\productCategoryAddController.js" />
     <Content Include="App\Components\product_categories\productCategoryAddView.html" />
+    <Content Include="App\Components\product_categories\productCategoryEditController.js" />
+    <Content Include="App\Components\product_categories\productCategoryEditView.html" />
     <Content Include="App\Components\product_categories\productCategoryListController.js" />
     <Content Include="App\Components\product_categories\productCategoryListView.html" />
     <Content Include="App\Shared\directives\pagerDirective.html" />
@@ -235,6 +237,7 @@
     <Content Include="App\Shared\filter\statusFilter.js" />
     <Content Include="App\Shared\modules\myshop.common.js" />
     <Content Include="App\Shared\services\apiService.js" />
+    <Content Include="App\Shared\services\generateSeoTitleService.js" />
     <Content Include="App\Shared\services\notificationService.js" />
     <Content Include="Assets\admin\css\AdminLTE.css" />
     <Content Include="Assets\admin\css\AdminLTE.min.css" />

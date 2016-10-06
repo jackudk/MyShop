@@ -17,7 +17,7 @@
                 params: {
                     keyWord: $scope.keyWord,
                     page: page,
-                    pageSize: 2
+                    pageSize: 4
                 }
             };
 

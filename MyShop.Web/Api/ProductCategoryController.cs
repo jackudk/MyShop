@@ -57,6 +57,17 @@ namespace MyShop.Web.Api
             });
         }
 
+        [Route("getbyid")]
+        public HttpResponseMessage Get(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetByID(id);
+                var responseModel = Mapper.Map<ProductCategoryViewModel>(model);
+                return request.CreateResponse(HttpStatusCode.OK, responseModel);
+            });
+        }
+
         [Route("add")]
         public HttpResponseMessage Post(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
         {
@@ -69,14 +80,43 @@ namespace MyShop.Web.Api
                 }
                 else
                 {
-                    ProductCategory productCategory = new ProductCategory();
-                    productCategory.CloneProductCategory(productCategoryVM);
+                    ProductCategory newProductCategory = new ProductCategory();
+                    newProductCategory.CloneProductCategory(productCategoryVM);
+                    newProductCategory.CreatedDate = DateTime.Now;
+                    //TODO: CreatedBy???
 
-                    var model = _productCategoryService.Add(productCategory);
+                    var model = _productCategoryService.Add(newProductCategory);
                     _productCategoryService.SaveChanges();
 
                     var responseModel = Mapper.Map<ProductCategoryViewModel>(model);
                     response = request.CreateResponse(HttpStatusCode.Created, responseModel);
+                }
+                return response;
+            });
+        }
+
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    ProductCategory dbProductCategory = _productCategoryService.GetByID(productCategoryVM.ID);
+                    dbProductCategory.CloneProductCategory(productCategoryVM);
+                    dbProductCategory.UpdatedDate = DateTime.Now;
+                    //TODO: UpdateBy??
+
+                    _productCategoryService.Update(dbProductCategory);
+                    _productCategoryService.SaveChanges();
+
+                    var responseModel = Mapper.Map<ProductCategoryViewModel>(dbProductCategory);
+                    response = request.CreateResponse(HttpStatusCode.OK, responseModel);
                 }
                 return response;
             });

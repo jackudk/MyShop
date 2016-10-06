@@ -47,15 +47,19 @@
                         <tr ng-repeat="item in productCategories">
                             <td>{{item.ID}}</td>
                             <td>{{item.Name}}</td>
-                            <td>{{item.CreatedDate | date:'dd/MM/yyyy HH:mm:ss Z'}}</td>
+                            <td>{{item.CreatedDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                             <td>
                                 <span ng-class="{'label label-success': item.Status==true, 'label label-danger': item.Status==false}">
                                     {{item.Status | statusFilter}}
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                <button class="btn btn-sm btn-primary" ui-sref="productCategory_edit({id:item.ID})">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
                             </td>
                         </tr>
                         <tfoot>
