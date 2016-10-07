@@ -10,6 +10,7 @@ using MyShop.Web.Models;
 using AutoMapper;
 using MyShop.Model.Models;
 using MyShop.Web.Infastructure.Extensions;
+using System.Web.Script.Serialization;
 
 namespace MyShop.Web.Api
 {
@@ -119,6 +120,35 @@ namespace MyShop.Web.Api
                     response = request.CreateResponse(HttpStatusCode.OK, responseModel);
                 }
                 return response;
+            });
+        }
+
+        [Route("delete")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                ProductCategory dbProductCategory = _productCategoryService.Delete(id);
+                _productCategoryService.SaveChanges();
+
+                var responseModel = Mapper.Map<ProductCategoryViewModel>(dbProductCategory);
+                return request.CreateResponse(HttpStatusCode.OK, responseModel);
+            });
+        }
+
+        [Route("deletemulti")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, string ids)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var listID = new JavaScriptSerializer().Deserialize<List<int>>(ids);
+                foreach (var id in listID)
+                {
+                    _productCategoryService.Delete(id);
+                }
+                _productCategoryService.SaveChanges();
+                
+                return request.CreateResponse(HttpStatusCode.OK, listID.Count);
             });
         }
     }

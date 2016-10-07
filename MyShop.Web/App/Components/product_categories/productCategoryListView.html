@@ -19,6 +19,14 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-4">
+                    <button class="btn btn-danger" id="btnDeleteMulti" disabled ng-click="deleteMulti()">
+                        <i class="glyphicon glyphicon-trash"></i> Xóa
+                    </button>
+                    <button ui-sref="productCategory_add" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i> Thêm mới
+                    </button>
+                </div>
+                <div class="col-md-8">
                     <div class="input-group">
                         <input type="text" ng-model="keyWord" class="form-control pull-right" placeholder="Search for...">
                         <span class="input-group-btn">
@@ -26,18 +34,14 @@
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-md-8">
-                    <button ui-sref="productCategory_add" class="btn btn-primary pull-right">
-                        <i class="glyphicon glyphicon-plus"></i> Thêm mới
-                    </button>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-hover">
                         <tr>
+                            <td><input type="checkbox" ng-model="isCheckedAll" ng-click="checkAll()"/></td>
                             <th>ID</th>
                             <th>Tên</th>
                             <th>Ngày tạo</th>
@@ -45,6 +49,7 @@
                             <th></th>
                         </tr>
                         <tr ng-repeat="item in productCategories">
+                            <td><input type="checkbox" ng-model="item.checked"/></td>
                             <td>{{item.ID}}</td>
                             <td>{{item.Name}}</td>
                             <td>{{item.CreatedDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
@@ -57,7 +62,7 @@
                                 <button class="btn btn-sm btn-primary" ui-sref="productCategory_edit({id:item.ID})">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger" ng-click="deleteProductCategories(item.ID)">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>
