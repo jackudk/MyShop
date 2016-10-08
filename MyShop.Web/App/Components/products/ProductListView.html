@@ -1,13 +1,11 @@
 ﻿<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Admin-Home page
-        <small>This is Admin-Home page of SPA</small>
+        Sản phẩm
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li><a href="#">Sản phẩm</a></li>
-        <li class="active">Danh sách</li>
+        <li class="active">Sản phẩm</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -15,19 +13,78 @@
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Danh sách sản phẩm</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
+            <h3 class="box-title">Sản phẩm</h3>
         </div>
         <div class="box-body">
-            Start creating your amazing application!
+            <div class="row">
+                <div class="col-md-4">
+                    <button class="btn btn-danger" id="btnDeleteMulti" disabled ng-click="deleteMulti()">
+                        <i class="glyphicon glyphicon-trash"></i> Xóa
+                    </button>
+                    <button ui-sref="product_add" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i> Thêm mới
+                    </button>
+                </div>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" ng-model="keyWord" class="form-control pull-right" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="getProducts()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <tr>
+                            <td><input type="checkbox" ng-model="isCheckedAll" ng-click="checkAll()" /></td>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Ngày tạo</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="item in products">
+                            <td><input type="checkbox" ng-model="item.checked" /></td>
+                            <td>{{item.ID}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.CreatedDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                            <td>
+                                <span ng-class="{'label label-success': item.Status==true, 'label label-danger': item.Status==false}">
+                                    {{item.Status | statusFilter}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" ui-sref="product_edit({id:item.ID})">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" ng-click="deleteProduct(item.ID)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <span class="pull-right">
+                                        Trang {{page+1}}/{{totalPages}} -
+                                        Tổng số bản ghi: {{totalCount}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <pager-directive page="{{page}}" total-pages="{{totalPages}}" total-count="{{totalCount}}" search-func="getProducts(page)"></pager-directive>
+        </div>
+        <!-- /.box-footer-->
     </div>
     <!-- /.box -->
 </section>

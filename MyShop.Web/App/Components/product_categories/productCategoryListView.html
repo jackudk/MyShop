@@ -62,14 +62,14 @@
                                 <button class="btn btn-sm btn-primary" ui-sref="productCategory_edit({id:item.ID})">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                                <button class="btn btn-sm btn-danger" ng-click="deleteProductCategories(item.ID)">
+                                <button class="btn btn-sm btn-danger" ng-click="deleteProductCategory(item.ID)">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </td>
                         </tr>
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     <span class="pull-right">
                                         Trang {{page+1}}/{{totalPages}} - 
                                         Tổng số bản ghi: {{totalCount}}

@@ -15,9 +15,9 @@ namespace MyShop.Service
 
         IEnumerable<Product> GetAll();
 
-        //IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage);
+        IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage);
 
-        //IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage);
+        IEnumerable<Product> GetAllPaging(string keyWord, int page, int pageSize, out int totalRows);
 
         Product GetByID(int id);
 
@@ -28,48 +28,52 @@ namespace MyShop.Service
 
     public class ProductService : IProductService
     {
-        private IProductRepository _ProductRepository;
+        private IProductRepository _productRepository;
         private IUnitOfWork _unitOfWork;
 
         public ProductService(IProductRepository ProductRepository, IUnitOfWork unitOfWork)
         {
-            this._ProductRepository = ProductRepository;
+            this._productRepository = ProductRepository;
             this._unitOfWork = unitOfWork;
         }
 
         public Product Add(Product Product)
         {
-            return _ProductRepository.Add(Product);
+            return _productRepository.Add(Product);
         }
 
         public Product Delete(int id)
         {
-            return _ProductRepository.Delete(id);
+            return _productRepository.Delete(id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return _ProductRepository.GetAll(new string[] { "ProductCategory" });
+            return _productRepository.GetAll(new string[] { "Product" });
         }
-
-        //public IEnumerable<Product> GetAllByCategoryPaging(int categoryID, int page, int pageSize, out int totalPage)
-        //{
-        //    return _ProductRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryID, out totalPage, page, pageSize, new string[] { "ProductCategory" });
-        //}
 
         public IEnumerable<Product> getAllByTagPaging(string tag, int page, int pageSize, out int totalPage)
         {
-            return _ProductRepository.GetAllByTagPaging(tag, page, pageSize, out totalPage);
+            return _productRepository.GetAllByTagPaging(tag, page, pageSize, out totalPage);
         }
 
-        //public IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage)
-        //{
-        //    return _ProductRepository.GetMultiPaging(x => x.Status, out totalPage, page, pageSize);
-        //}
+        public IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRows)
+        {
+            return _productRepository.GetMultiPaging(null, x => x.CreatedDate, out totalRows, page, pageSize);
+        }
+
+        public IEnumerable<Product> GetAllPaging(string keyWord, int page, int pageSize, out int totalRows)
+        {
+            if (string.IsNullOrEmpty(keyWord))
+            {
+                return _productRepository.GetMultiPaging(null, x => x.CreatedDate, out totalRows, page, pageSize);
+            }
+            return _productRepository.GetMultiPaging(x => x.Name.Contains(keyWord) || x.Description.Contains(keyWord), x => x.CreatedDate, out totalRows, page, pageSize);
+        }
 
         public Product GetByID(int id)
         {
-            return _ProductRepository.GetSingleById(id);
+            return _productRepository.GetSingleById(id);
         }
 
         public void SaveChanges()
@@ -79,7 +83,7 @@ namespace MyShop.Service
 
         public void Update(Product Product)
         {
-            _ProductRepository.Update(Product);
+            _productRepository.Update(Product);
         }
     }
 }

@@ -17,7 +17,7 @@
         $scope.isCheckedAll = false;
 
         $scope.getProductCategories = getProductCategories;
-        $scope.deleteProductCategories = deleteProductCategories;
+        $scope.deleteProductCategory = deleteProductCategory;
         $scope.deleteMulti = deleteMulti;
 
         $scope.$watch('productCategories', function (n, o) {
@@ -65,7 +65,7 @@
             });
         }
 
-        function deleteProductCategories(id) {
+        function deleteProductCategory(id) {
             var config = {
                 params: {
                     id: id
