@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 namespace MyShop.Web.Api
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         private IProductService _productService;
@@ -83,7 +84,7 @@ namespace MyShop.Web.Api
                     Product newProduct = new Product();
                     newProduct.CloneProduct(productVM);
                     newProduct.CreatedDate = DateTime.Now;
-                    //TODO: CreatedBy???
+                    newProduct.CreatedBy = User.Identity.Name;
 
                     var model = _productService.Add(newProduct);
                     _productService.SaveChanges();
@@ -110,7 +111,7 @@ namespace MyShop.Web.Api
                     Product dbProduct = _productService.GetByID(productVM.ID);
                     dbProduct.CloneProduct(productVM);
                     dbProduct.UpdatedDate = DateTime.Now;
-                    //TODO: UpdateBy??
+                    dbProduct.UpdatedBy = User.Identity.Name;
 
                     _productService.Update(dbProduct);
                     _productService.SaveChanges();

@@ -14,8 +14,11 @@
             Status: true
         };
         $scope.productCategories = [];
+        $scope.moreImages = [];
+
         $scope.getSeoTitle = getSeoTitle;
         $scope.choseImage = choseImage;
+        $scope.choseMoreImages = choseMoreImages;
         $scope.addProduct = addProduct;
 
         function getSeoTitle() {
@@ -25,7 +28,19 @@
         function choseImage() {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.Image = fileUrl;
+                $scope.$apply(function () {
+                    $scope.product.Image = fileUrl;
+                });
+            }
+            finder.popup();
+        }
+
+        function choseMoreImages() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.moreImages.push(fileUrl);
+                });
             }
             finder.popup();
         }
@@ -34,11 +49,12 @@
             apiService.get("api/productCategory/getall", null, function (result) {
                 $scope.productCategories = result.data;
             }, function (error) {
-                console.log("Cannot load parents list.")
+                console.log("Cannot load product categories.")
             });
         }
 
         function addProduct() {
+            $scope.product.MoreImages = JSON.stringify($scope.moreImages);
             apiService.post("api/product/add", $scope.product, function (result) {
                 notificationService.displaySuccess('Thêm mới thành công sản phẩm \'' + result.data.Name + '\'');
                 $state.go('products');

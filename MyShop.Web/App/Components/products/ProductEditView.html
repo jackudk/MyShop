@@ -1,10 +1,150 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Sản phẩm
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a ui-sref="products">Sản phẩm</a></li>
+        <li class="active">Cập nhật</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập nhật</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpdateProduct" role="form" ng-submit="updateProduct()">
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Tên</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="name" ng-maxlength="256" required ng-model="product.Name" ng-change="getSeoTitle()">
+                        <span style="color: red" ng-show="frmUpdateProduct.name.$error.required">Chưa nhập tên danh mục</span>
+                        <span style="color: red" ng-show="frmUpdateProduct.name.$error.maxlength">Tên danh mục không quá 256 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Tiêu đề SEO</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="alias" ng-maxlength="256" required ng-model="product.Alias">
+                        <span style="color: red" ng-show="frmUpdateProduct.alias.$error.required">Chưa nhập tiêu để Seo</span>
+                        <span style="color: red" ng-show="frmUpdateProduct.alias.$error.maxlength">Tiêu đề Seo không quá 256 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Hình ảnh</label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="image" ng-model="product.Image">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" ng-click="choseImage()">Chọn ảnh</button>
+                            </span>
+                        </div>
 
-</body>
-</html>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Hình ảnh khác</label>
+                    <div class="col-md-10">
+                        <ul class="list-inline">
+                            <li ng-repeat="img in moreImages track by $index">
+                                <img width="200" ng-src="{{img}}" />
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-primary" ng-click="choseMoreImages()">Ảnh khác</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Danh mục</label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="categoryID" required ng-model="product.CategoryID" ng-options="option.ID as option.Name for option in productCategories"></select>
+                        <span style="color: red" ng-show="frmUpdateProduct.categoryID.$error.required">Chưa chọn danh mục cho sản phẩm</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Giá</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="price" required ng-model="product.Price">
+                        <span style="color: red" ng-show="frmUpdateProduct.price.$error.required">Chưa nhập giá sản phẩm</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Giá mới</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="promotionPrice" ng-model="product.PromotionPrice">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Bảo hành</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="warranty" ng-model="product.Warranty">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Mô tả</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="description" ckeditor="ckEditorOptions" ng-model="product.Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Nội dung</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="content" ng-model="product.Content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Meta Description</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="metaDescription" ng-model="product.MetaDescription"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Meta Keyword</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="metaKeyword" ng-model="product.MetaKeyword">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="status" ng-model="product.Status" ng-checked="product.Status"> Status
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="homeFlag" ng-model="product.HomeFlag" ng-checked="product.HomeFlag"> Hiển thị trang chủ
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="hotFlag" ng-model="product.HotFlag" ng-checked="product.HotFlag"> Sản phẩm nổi bật
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button class="btn btn-danger" ui-sref="products">Hủy</button>
+                <button type="submit" class="btn btn-primary pull-right" ng-disabled="frmUpdateProduct.$invalid">Lưu</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

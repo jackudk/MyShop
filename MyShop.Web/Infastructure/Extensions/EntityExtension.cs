@@ -39,9 +39,9 @@ namespace MyShop.Web.Infastructure.Extensions
             post.Description = postVM.Description;
             post.CategoryID = postVM.CategoryID;
             post.Content = postVM.Content;
-            post.HomeFlag = post.HomeFlag;
-            post.HotFlag = post.HotFlag;
-            post.ViewCount = post.ViewCount;
+            post.HomeFlag = postVM.HomeFlag;
+            post.HotFlag = postVM.HotFlag;
+            post.ViewCount = postVM.ViewCount;
 
             post.CreatedBy = postVM.CreatedBy;
             post.CreatedDate = postVM.CreatedDate;
@@ -87,9 +87,9 @@ namespace MyShop.Web.Infastructure.Extensions
             product.Warranty = productVM.Warranty;
             product.Description = productVM.Description;
             product.Content = productVM.Content;
-            product.HomeFlag = product.HomeFlag;
-            product.HotFlag = product.HotFlag;
-            product.ViewCount = product.ViewCount;
+            product.HomeFlag = productVM.HomeFlag;
+            product.HotFlag = productVM.HotFlag;
+            product.ViewCount = productVM.ViewCount;
 
             product.CreatedBy = productVM.CreatedBy;
             product.CreatedDate = productVM.CreatedDate;
@@ -100,5 +100,5 @@ namespace MyShop.Web.Infastructure.Extensions
             product.Status = productVM.Status;
 
         }
-}
+    }
 }
