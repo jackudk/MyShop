@@ -197,6 +197,7 @@
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\SlideController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -213,12 +214,14 @@
     <Compile Include="Infastructure\Core\PaginationSet.cs" />
     <Compile Include="Infastructure\Extensions\EntityExtension.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\PostCategoryViewModel.cs" />
     <Compile Include="Models\PostTagViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -243,6 +246,13 @@
     <Content Include="App\Components\product_categories\productCategoryEditView.html" />
     <Content Include="App\Components\product_categories\productCategoryListController.js" />
     <Content Include="App\Components\product_categories\productCategoryListView.html" />
+    <Content Include="App\Components\slides\slideAddController.js" />
+    <Content Include="App\Components\slides\slideAddView.html" />
+    <Content Include="App\Components\slides\slideEditController.js" />
+    <Content Include="App\Components\slides\slideEditView.html" />
+    <Content Include="App\Components\slides\slideListController.js" />
+    <Content Include="App\Components\slides\slideListView.html" />
+    <Content Include="App\Components\slides\slides.Module.js" />
     <Content Include="App\Shared\directives\pagerDirective.html" />
     <Content Include="App\Shared\directives\pagerDirective.js" />
     <Content Include="App\Shared\filter\statusFilter.js" />
@@ -4408,6 +4418,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Category.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Slide.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

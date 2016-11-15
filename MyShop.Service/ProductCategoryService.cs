@@ -17,7 +17,7 @@ namespace MyShop.Service
 
         IEnumerable<ProductCategory> GetAll();
 
-        IEnumerable<ProductCategory> GetMulti(Expression<Func<ProductCategory, bool>> where);
+        IEnumerable<ProductCategory> GetMulti(Expression<Func<ProductCategory, bool>> predicate);
 
         IEnumerable<ProductCategory> GetAllPaging(int page, int pageSize, out int totalPage);
 

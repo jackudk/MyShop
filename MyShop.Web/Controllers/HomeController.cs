@@ -12,15 +12,26 @@ namespace MyShop.Web.Controllers
     public class HomeController : Controller
     {
         IProductCategoryService _productCategoryService;
+        IProductService _productService;
+        ISlideService _slideService;
 
-        public HomeController(IProductCategoryService productCategoryService)
+        public HomeController(IProductCategoryService productCategoryService, IProductService productService, ISlideService slideService)
         {
             this._productCategoryService = productCategoryService;
+            this._productService = productService;
+            this._slideService = slideService;
         }
 
         public ActionResult Index()
         {
-            return View();
+            var latestProducts = _productService.GetMulti(x => x.Status == true)
+                .OrderByDescending(x => x.CreatedDate).Take(3);
+            var hotestProducts = _productService.GetMulti(x => x.Status == true && x.HotFlag==true)
+                .OrderByDescending(x => x.CreatedDate).Take(3);
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.HotestProducts = Mapper.Map<IEnumerable<ProductViewModel>>(hotestProducts);
+            homeViewModel.LatestProducts = Mapper.Map<IEnumerable<ProductViewModel>>(latestProducts);
+            return View(homeViewModel);
         }
 
         public ActionResult About()
@@ -52,10 +63,19 @@ namespace MyShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Category()
         {
-            var productCategory = _productCategoryService.GetMulti(x => x.Status == true && x.HomeFlag == true)
+            var productCategories = _productCategoryService.GetMulti(x => x.Status == true && x.HomeFlag == true)
                 .OrderBy(x => x.DisplayOrder);
 
-            var viewModel = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategory);
+            var viewModel = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategories);
+            return PartialView(viewModel);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Slide()
+        {
+            var slides = _slideService.GetMulti(x => x.Status == true).OrderBy(x => x.DisplayOrder);
+
+            var viewModel = Mapper.Map<IEnumerable<SlideViewModel>>(slides);
             return PartialView(viewModel);
         }
     }

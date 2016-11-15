@@ -100,5 +100,23 @@ namespace MyShop.Web.Infastructure.Extensions
             product.Status = productVM.Status;
 
         }
+
+        public static void CloneSlide(this Slide slide, SlideViewModel slideVM)
+        {
+            slide.ID = slideVM.ID;
+            slide.Name = slideVM.Name;
+            slide.Image = slideVM.Image;
+            slide.Description = slideVM.Description;
+            slide.Content = slideVM.Content;
+            slide.URL = slideVM.URL;
+            slide.DisplayOrder = slideVM.DisplayOrder;
+
+            slide.CreatedBy = slideVM.CreatedBy;
+            slide.CreatedDate = slideVM.CreatedDate;
+            slide.UpdatedBy = slideVM.UpdatedBy;
+            slide.UpdatedDate = slideVM.UpdatedDate;
+            slide.Status = slideVM.Status;
+
+        }
     }
 }

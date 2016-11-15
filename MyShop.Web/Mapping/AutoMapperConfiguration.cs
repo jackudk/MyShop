@@ -10,15 +10,17 @@ namespace MyShop.Web.Mapping
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<PostCategory, PostCategoryViewModel>();
-                cfg.CreateMap<Post, PostViewModel>();
-                cfg.CreateMap<PostTag, PostTagViewModel>();
+                cfg.CreateMap<PostCategory, PostCategoryViewModel>().MaxDepth(2);
+                cfg.CreateMap<Post, PostViewModel>().MaxDepth(2);
+                cfg.CreateMap<PostTag, PostTagViewModel>().MaxDepth(2);
 
-                cfg.CreateMap<ProductCategory, ProductCategoryViewModel>();
-                cfg.CreateMap<Product, ProductViewModel>();
-                cfg.CreateMap<ProductTag, ProductTagViewModel>();
+                cfg.CreateMap<ProductCategory, ProductCategoryViewModel>().MaxDepth(2);
+                cfg.CreateMap<Product, ProductViewModel>().MaxDepth(2);
+                cfg.CreateMap<ProductTag, ProductTagViewModel>().MaxDepth(2);
 
-                cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<Tag, TagViewModel>().MaxDepth(2);
+
+                cfg.CreateMap<Slide, SlideViewModel>().MaxDepth(2);
             });
         }
     }

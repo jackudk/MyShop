@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\Ass.cs" />
+    <Compile Include="Abstracts\Asw.cs" />
     <Compile Include="Abstracts\IAuditable.cs" />
     <Compile Include="Abstracts\ISeoable.cs" />
     <Compile Include="Abstracts\ISwitchable.cs" />

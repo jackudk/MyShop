@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyShop.Model.Abstracts;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyShop.Model.Models
 {
     [Table("Slides")]
-    public class Slide
+    public class Slide : Asw
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,6 +17,8 @@ namespace MyShop.Model.Models
 
         [MaxLength(256)]
         public string Description { set; get; }
+        
+        public string Content { set; get; }
 
         [MaxLength(256)]
         public string Image { set; get; }
@@ -24,6 +27,5 @@ namespace MyShop.Model.Models
         public string URL { set; get; }
 
         public int? DisplayOrder { set; get; }
-        public bool Status { set; get; }
     }
 }

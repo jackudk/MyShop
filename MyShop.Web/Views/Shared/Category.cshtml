@@ -14,7 +14,7 @@
                         <ul class="cute">
                             @foreach (var childCategory in childCategories)
                             {
-                                @url= "/" + childCategory.Alias + ".pc-" + childCategory.ID + ".html";
+                                url= "/" + childCategory.Alias + ".pc-" + childCategory.ID + ".html";
                                 <li><a href="@url">@childCategory.Name</a></li>
                             }
                         </ul>
@@ -22,7 +22,8 @@
                 }
                 else
                 {
-                    <li><a href="product.html">@rootCategory.Name</a></li>
+                    url = "/" + rootCategory.Alias + ".pc-" + rootCategory.ID + ".html";
+                    <li><a href="@url">@rootCategory.Name</a></li>
                 }
             }
         </ul>

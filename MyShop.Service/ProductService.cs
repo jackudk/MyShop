@@ -1,7 +1,9 @@
 ﻿using MyShop.Data.InfraStructure;
 using MyShop.Data.Respositories;
 using MyShop.Model.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace MyShop.Service
 {
@@ -14,6 +16,8 @@ namespace MyShop.Service
         Product Delete(int id);
 
         IEnumerable<Product> GetAll();
+
+        IEnumerable<Product> GetMulti(Expression<Func<Product, bool>> predicate);
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalPage);
 
@@ -74,6 +78,11 @@ namespace MyShop.Service
         public Product GetByID(int id)
         {
             return _productRepository.GetSingleById(id);
+        }
+
+        public IEnumerable<Product> GetMulti(Expression<Func<Product, bool>> predicate)
+        {
+            return _productRepository.GetMulti(predicate);
         }
 
         public void SaveChanges()

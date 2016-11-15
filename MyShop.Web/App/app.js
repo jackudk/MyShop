@@ -5,6 +5,7 @@
     angular.module('myshop',
         ['myshop.products',
             'myshop.productCategories',
+            'myshop.slides',
             'myshop.common'])
         .config(config)
         .config(configAuthentication);

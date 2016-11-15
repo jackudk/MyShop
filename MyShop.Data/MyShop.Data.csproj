@@ -84,6 +84,14 @@
     <Compile Include="Migrations\201609272101271_changeKey.Designer.cs">
       <DependentUpon>201609272101271_changeKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611072012272_AddContentToSlideTable.cs" />
+    <Compile Include="Migrations\201611072012272_AddContentToSlideTable.Designer.cs">
+      <DependentUpon>201611072012272_AddContentToSlideTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611072103080_AddASWColumnsToOrderAndSlide.cs" />
+    <Compile Include="Migrations\201611072103080_AddASWColumnsToOrderAndSlide.Designer.cs">
+      <DependentUpon>201611072103080_AddASWColumnsToOrderAndSlide.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609272101271_changeKey.resx">
       <DependentUpon>201609272101271_changeKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611072012272_AddContentToSlideTable.resx">
+      <DependentUpon>201611072012272_AddContentToSlideTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611072103080_AddASWColumnsToOrderAndSlide.resx">
+      <DependentUpon>201611072103080_AddASWColumnsToOrderAndSlide.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
